@@ -1,14 +1,14 @@
 version: "3"
 services:
   react-app:
-    image: spa-project
+    image: mellsson/spa-project:latest
     stdin_open: true
     ports:
       - "3000:3000"
     networks:
       - mern-app
   api-server:
-    image: api-server-spa
+    image: mellsson/api-server-spa:latest
     ports:
       - "5000:5000"
     networks:
@@ -16,7 +16,7 @@ services:
     depends_on:
       - database
   database:
-    image: postgres
+    image: mellsson/postgres:latest
     environment:
       POSTGRES_DB: "db_comments"
       POSTGRES_USER: "postgres"

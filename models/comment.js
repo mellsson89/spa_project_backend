@@ -1,4 +1,4 @@
-const { DataTypes, literal } = require('sequelize');
+const { DataTypes} = require('sequelize');
 const {db} = require('../config/db');
 const moment = require('moment-timezone');
 const {AvatarGenerator} = require('random-avatar-generator');
@@ -64,9 +64,9 @@ const Comment = db.define('comment',
 Comment.isHierarchy();
 
 
-// (async () => {
-//     await db.sync({ alter: true});
-// })();
+(async () => {
+    await db.sync({ alter: true});
+})();
 
 
 
