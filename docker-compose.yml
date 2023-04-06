@@ -1,0 +1,35 @@
+version: "3"
+services:
+  react-app:
+    image: spa-project
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - mern-app
+  api-server:
+    image: api-server-spa
+    ports:
+      - "5000:5000"
+    networks:
+      - mern-app
+    depends_on:
+      - database
+  database:
+    image: postgres
+    environment:
+      POSTGRES_DB: "db_comments"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "2576698"
+    ports:
+      - "5433:5432"
+    networks:
+      - mern-app
+    volumes:
+      - postgres-data:/data/db
+volumes:
+  postgres-data:
+    driver: local
+networks:
+  mern-app:
+    driver: bridge
