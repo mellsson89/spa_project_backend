@@ -4,7 +4,6 @@ const addComment = async (req, res, next) => {
 
     try {
         const {parentId} = req.body;
-        console.log(req.body)
 
         if(parentId) {
             const nestedComment = await Comment.create({...req.body})
@@ -12,7 +11,7 @@ const addComment = async (req, res, next) => {
         }
 
         const newComment = await Comment.create({...req.body})
-        console.log(newComment)
+
         res.status(201).json({data: newComment});
     } catch (error) {
         next(error)
