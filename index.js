@@ -15,8 +15,10 @@ dotenv.config({path:'./config/.env'});
 
 const io = new Server(httpServer,{
     cors: {
-        origin: "*",
-        credentials: true,
+        origin: "https://main.dwpoabw8mgb51.amplifyapp.com",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
     }
 });
 
