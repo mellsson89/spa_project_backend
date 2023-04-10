@@ -12,20 +12,6 @@ const fs = require('fs/promises');
 
 dotenv.config({path:'./config/.env'});
 
-
-const commentsRouter = require('./routes/api/comments')
-
-
-const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
-
-
-app.use(logger(formatsLogger));
-app.use(cors());
-app.use(express.json());
-app.use(express.static('public'));
-
-connectDb();
-
 const io = new Server(httpServer,{
     cors: {
         origin: "*",
@@ -56,6 +42,19 @@ io.on('connection',  (socket) => {
 
 })
 
+
+const commentsRouter = require('./routes/api/comments')
+
+
+const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
+
+
+app.use(logger(formatsLogger));
+app.use(cors());
+app.use(express.json());
+app.use(express.static('public'));
+
+connectDb();
 
 
 app.use('/api/v1/comments', commentsRouter);
