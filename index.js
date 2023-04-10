@@ -14,7 +14,7 @@ dotenv.config({path:'./config/.env'});
 
 const io = new Server(httpServer,{
     cors: {
-        origin: "*",
+        origin: "https://spa-project-backend.vercel.app:5000",
         methods: ["GET", "POST"],
     }
 });
