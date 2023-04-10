@@ -62,7 +62,7 @@ connectDb();
 app.use('/api/v1/comments', commentsRouter);
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://spa-project-backend.vercel.app");
+    res.header("Access-Control-Allow-Origin", "https://main.dwpoabw8mgb51.amplifyapp.com");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
