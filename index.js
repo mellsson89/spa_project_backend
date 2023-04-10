@@ -11,11 +11,23 @@ const Comment = require("./models/comment");
 const fs = require('fs/promises');
 
 dotenv.config({path:'./config/.env'});
-
-
 const io = new Server(httpServer);
 
-io.origins('*:*');
+
+
+const commentsRouter = require('./routes/api/comments')
+
+
+const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
+
+
+app.use(logger(formatsLogger));
+app.use(cors());
+app.use(express.json());
+app.use(express.static('public'));
+
+connectDb();
+
 io.on('connection',  (socket) => {
 
     socket.on('add-comment',  async ({page, limit, key, sort}) => {
@@ -38,20 +50,6 @@ io.on('connection',  (socket) => {
 
 
 })
-
-
-const commentsRouter = require('./routes/api/comments')
-
-
-const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
-
-
-app.use(logger(formatsLogger));
-app.use(cors());
-app.use(express.json());
-app.use(express.static('public'));
-
-connectDb();
 
 
 app.use('/api/v1/comments', commentsRouter);
