@@ -13,12 +13,7 @@ const fs = require('fs/promises');
 dotenv.config({path:'./config/.env'});
 
 
-const io = new Server(httpServer,{
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
-    }
-});
+const io = new Server(httpServer);
 
 
 io.on('connection',  (socket) => {
