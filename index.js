@@ -15,7 +15,7 @@ dotenv.config({path:'./config/.env'});
 
 const io = new Server(httpServer);
 
-
+io.origins('*:*');
 io.on('connection',  (socket) => {
 
     socket.on('add-comment',  async ({page, limit, key, sort}) => {
