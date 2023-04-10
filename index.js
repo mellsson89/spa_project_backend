@@ -11,22 +11,13 @@ const Comment = require("./models/comment");
 const fs = require('fs/promises');
 
 dotenv.config({path:'./config/.env'});
-const io = new Server(httpServer);
 
-
-
-const commentsRouter = require('./routes/api/comments')
-
-
-const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
-
-
-app.use(logger(formatsLogger));
-app.use(cors());
-app.use(express.json());
-app.use(express.static('public'));
-
-connectDb();
+const io = new Server(httpServer,{
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+    }
+});
 
 io.on('connection',  (socket) => {
 
@@ -52,13 +43,23 @@ io.on('connection',  (socket) => {
 })
 
 
+const commentsRouter = require('./routes/api/comments')
+
+
+const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
+
+
+app.use(logger(formatsLogger));
+app.use(cors());
+app.use(express.json());
+app.use(express.static('public'));
+
+connectDb();
+
+
 app.use('/api/v1/comments', commentsRouter);
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "https://spa-project-backend.vercel.app");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
+
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' })
 })
