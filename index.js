@@ -16,7 +16,7 @@ dotenv.config({path:'./config/.env'});
 
 const io = new Server(httpServer,{
     cors: {
-        origin: "http://localhost:5000",
+        origin: "http://localhost:3000",
         credentials:true
     }
 });
