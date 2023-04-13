@@ -32,7 +32,6 @@ const uploadFile = multer({ storage: storage,
         }
         cb(new Error('Wrong format file !!!'))
 
-
     }})
 
 module.exports = {uploadImg: upload, uploadFile};

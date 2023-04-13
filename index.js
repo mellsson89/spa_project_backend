@@ -12,10 +12,12 @@ const fs = require('fs/promises');
 
 dotenv.config({path:'./config/.env'});
 
+
+
 const io = new Server(httpServer,{
     cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
+        origin: "http://localhost:5000",
+        credentials:true
     }
 });
 
@@ -73,11 +75,11 @@ console.log(err.message);
 })
 
 
-const {PORT} = process.env;
+const {PORT, UPLOAD_DIR} = process.env;
 
 
 const server = httpServer.listen(PORT, async () => {
-    await fs.mkdir('tmp',{recursive:true});
+    await fs.mkdir(UPLOAD_DIR,{recursive:true});
     console.log(`Server is running on port:${PORT}`)
 });
 

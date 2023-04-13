@@ -18,7 +18,7 @@ class UploadService {
 
     async transformFile(filePath) {
         const url = path.join(FOLDER_FILES, this.filename);
-        await fs.rename(filePath, url);
+        await fs.rename(filePath, path.join(__dirname, '../../', url));
         return path.normalize(path.join('files',this.filename));
     }
 
