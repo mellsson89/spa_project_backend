@@ -4,6 +4,9 @@ const moment = require('moment-timezone');
 const {AvatarGenerator} = require('random-avatar-generator');
 const generator = new AvatarGenerator();
 
+moment.tz.setDefault('Europe/Kiev');
+const now = moment();
+
 const Comment = db.define('comment',
 
     {
@@ -50,7 +53,7 @@ const Comment = db.define('comment',
             type: DataTypes.TEXT,
             allowNull: false,
             defaultValue: function () {
-                return moment.utc().format('DD.MM.YYYY HH:mm');
+                return now.format('DD.MM.YYYY HH:mm');
             },
 
         }
