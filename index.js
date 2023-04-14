@@ -3,6 +3,7 @@ const dotenv =  require('dotenv');
 const logger = require('morgan');
 const cors = require('cors');
 const app = express();
+const helmet = require("helmet");
 const {connectDb} = require('./config/db');
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -50,7 +51,7 @@ const commentsRouter = require('./routes/api/comments')
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
-
+app.use(helmet());
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());

@@ -30,8 +30,6 @@ const getAllComments = async (req, res, next) => {
         })
 
 
-
-
         const nbComments = allComments.length;
 
         const nbPages = nbComments > limit ? Math.ceil(nbComments / limit) : 1;
